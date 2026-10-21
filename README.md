@@ -21,3 +21,13 @@ npm run dev
 - Auto-save to localStorage
 - Sidebar list with live previews
 - Last-updated timestamp per note
+
+## Sibling apps
+
+`clone-supporting-apps.sh` clones the three sibling React apps (Hungama, E-Commerce, Appointment-Booking) into a local `supporting-apps/` directory for side-by-side development.
+
+```
+./clone-supporting-apps.sh
+```
+
+Optional arguments: target directory and branch (defaults to `supporting-apps` and `bc/217fd4e8-create-basic-level`, which is the branch that contains the React app code). The script is idempotent — already-cloned repos are skipped.
