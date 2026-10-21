@@ -208,6 +208,17 @@ body.dark .editor textarea {
   color: #e4e6eb;
 }
 
+.counter {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #999;
+  padding: 0.25rem 0;
+}
+
+body.dark .counter {
+  color: #8a8f99;
+}
+
 .empty {
   display: flex;
   align-items: center;

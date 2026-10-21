@@ -20,4 +20,5 @@ npm run dev
 - Create, edit, and delete notes
 - Auto-save to localStorage
 - Sidebar list with live previews
+- Live word & character counter
 - Last-updated timestamp per note

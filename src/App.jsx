@@ -129,6 +129,12 @@ export default function App() {
                 placeholder="Start writing..."
                 onChange={(e) => updateNote('body', e.target.value)}
               />
+              <div className="counter">
+                {activeNote.body.trim()
+                  ? activeNote.body.trim().split(/\s+/).length
+                  : 0}{' '}
+                words · {activeNote.body.length} chars
+              </div>
               <div className="actions">
                 <span className="meta">
                   Last updated:{' '}
