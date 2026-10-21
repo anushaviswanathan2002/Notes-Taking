@@ -262,3 +262,21 @@ body.dark .actions {
 .actions button:hover {
   background: #e66767;
 }
+
+.actions .pin-btn {
+  background: #6c5ce7;
+}
+
+.actions .pin-btn:hover {
+  background: #5a4dd1;
+}
+
+.note-list .title {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pin-icon {
+  font-size: 0.85rem;
+}

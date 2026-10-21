@@ -16,6 +16,7 @@ function loadNotes() {
       title: 'Welcome to your Notes',
       body: 'Click "New Note" to start writing. Your notes are saved automatically.',
       updatedAt: new Date().toISOString(),
+      pinned: false,
     },
   ]
 }
@@ -43,15 +44,32 @@ export default function App() {
 
   const activeNote = notes.find((n) => n.id === activeId)
 
+  // Pinned notes first, then by most recently updated
+  const sortedNotes = [...notes].sort((a, b) => {
+    const ap = a.pinned ? 1 : 0
+    const bp = b.pinned ? 1 : 0
+    if (ap !== bp) return bp - ap
+    return new Date(b.updatedAt) - new Date(a.updatedAt)
+  })
+
   const createNote = () => {
     const note = {
       id: Date.now(),
       title: 'Untitled note',
       body: '',
       updatedAt: new Date().toISOString(),
+      pinned: false,
     }
     setNotes([note, ...notes])
     setActiveId(note.id)
+  }
+
+  const togglePin = (id) => {
+    setNotes((prev) =>
+      prev.map((n) =>
+        n.id === id ? { ...n, pinned: !n.pinned, updatedAt: new Date().toISOString() } : n,
+      ),
+    )
   }
 
   const updateNote = (field, value) => {
@@ -95,18 +113,21 @@ export default function App() {
             + New Note
           </button>
           <ul className="note-list">
-            {notes.length === 0 && (
+            {sortedNotes.length === 0 && (
               <li style={{ color: '#999', cursor: 'default' }}>
                 No notes yet
               </li>
             )}
-            {notes.map((n) => (
+            {sortedNotes.map((n) => (
               <li
                 key={n.id}
                 className={n.id === activeId ? 'active' : ''}
                 onClick={() => setActiveId(n.id)}
               >
-                <div className="title">{n.title || 'Untitled'}</div>
+                <div className="title">
+                  {n.pinned && <span className="pin-icon" title="Pinned">📌</span>}
+                  {n.title || 'Untitled'}
+                </div>
                 <div className="preview">
                   {n.body || 'No additional text'}
                 </div>
@@ -140,6 +161,13 @@ export default function App() {
                   Last updated:{' '}
                   {new Date(activeNote.updatedAt).toLocaleString()}
                 </span>
+                <button
+                  className="pin-btn"
+                  onClick={() => togglePin(activeNote.id)}
+                  aria-label={activeNote.pinned ? 'Unpin note' : 'Pin note'}
+                >
+                  {activeNote.pinned ? '📌 Unpin' : '📌 Pin'}
+                </button>
                 <button onClick={deleteNote}>Delete</button>
               </div>
             </>
