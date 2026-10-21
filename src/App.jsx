@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 const STORAGE_KEY = 'notes-app-data'
+const THEME_KEY = 'notes-app-theme'
 
 function loadNotes() {
   try {
@@ -19,16 +20,26 @@ function loadNotes() {
   ]
 }
 
+function loadTheme() {
+  return localStorage.getItem(THEME_KEY) === 'dark'
+}
+
 export default function App() {
   const [notes, setNotes] = useState(loadNotes)
   const [activeId, setActiveId] = useState(() => {
     const initial = loadNotes()
     return initial[0]?.id ?? null
   })
+  const [dark, setDark] = useState(loadTheme)
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(notes))
   }, [notes])
+
+  useEffect(() => {
+    document.body.classList.toggle('dark', dark)
+    localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light')
+  }, [dark])
 
   const activeNote = notes.find((n) => n.id === activeId)
 
@@ -63,8 +74,19 @@ export default function App() {
   return (
     <div className="app">
       <header>
-        <h1>📝 My Notes</h1>
-        <p>Capture ideas, thoughts, and to-dos.</p>
+        <div className="header-row">
+          <div>
+            <h1>📝 My Notes</h1>
+            <p>Capture ideas, thoughts, and to-dos.</p>
+          </div>
+          <button
+            className="theme-toggle"
+            onClick={() => setDark((d) => !d)}
+            aria-label="Toggle dark mode"
+          >
+            {dark ? '☀️' : '🌙'}
+          </button>
+        </div>
       </header>
 
       <div className="layout">
