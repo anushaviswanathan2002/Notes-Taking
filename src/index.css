@@ -9,12 +9,49 @@ body {
   background: #f4f6f9;
   color: #2d3436;
   min-height: 100vh;
+  transition: background 0.25s, color 0.25s;
+}
+
+body.dark {
+  background: #1a1d23;
+  color: #e4e6eb;
 }
 
 .app {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem 1rem;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  background: #fff;
+  border: 1px solid #d0d4dd;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background: #f0f0ff;
+}
+
+body.dark .theme-toggle {
+  background: #2d3139;
+  border-color: #3d4149;
+}
+
+body.dark .theme-toggle:hover {
+  background: #3a3f48;
 }
 
 header h1 {
@@ -26,6 +63,14 @@ header h1 {
 header p {
   color: #636e72;
   margin-bottom: 1.5rem;
+}
+
+body.dark header p {
+  color: #9ca3af;
+}
+
+body.dark .note-list .preview {
+  color: #9ca3af;
 }
 
 .layout {
@@ -46,6 +91,11 @@ header p {
   padding: 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   height: fit-content;
+}
+
+body.dark .sidebar {
+  background: #252932;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .new-note-btn {
@@ -81,9 +131,18 @@ header p {
   background: #f0f0ff;
 }
 
+body.dark .note-list li:hover {
+  background: #2f3441;
+}
+
 .note-list li.active {
   background: #ece9ff;
   border-color: #6c5ce7;
+}
+
+body.dark .note-list li.active {
+  background: #3a3556;
+  border-color: #8b7df0;
 }
 
 .note-list .title {
@@ -110,6 +169,11 @@ header p {
   min-height: 500px;
 }
 
+body.dark .editor {
+  background: #252932;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
 .editor input[type="text"] {
   border: none;
   outline: none;
@@ -119,6 +183,12 @@ header p {
   color: #2d3436;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #eee;
+  background: transparent;
+}
+
+body.dark .editor input[type="text"] {
+  color: #e4e6eb;
+  border-bottom-color: #3a3f48;
 }
 
 .editor textarea {
@@ -131,6 +201,11 @@ header p {
   line-height: 1.6;
   color: #2d3436;
   min-height: 350px;
+  background: transparent;
+}
+
+body.dark .editor textarea {
+  color: #e4e6eb;
 }
 
 .empty {
@@ -142,6 +217,10 @@ header p {
   font-size: 1.1rem;
 }
 
+body.dark .empty {
+  color: #6b7280;
+}
+
 .actions {
   display: flex;
   justify-content: space-between;
@@ -149,6 +228,10 @@ header p {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid #eee;
+}
+
+body.dark .actions {
+  border-top-color: #3a3f48;
 }
 
 .actions .meta {
